@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>MediaWiki to Markdown Javascript Converter</title>
+<style>
+<!--
+.btn {
+	width: 300px;
+	height: 50px;
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+
+function convertMediawikiToMarkdown() {
+
+	var mediawikiEl = document.getElementById('input-mediawiki');
+	var contertedText = mediawikiEl.value;
+
+    // convert "==Heading 2==" to "# Heading 2" etc.
+	contertedText = contertedText.replace(/=====\s*(.*)\s*=====/g, "#### $1\n\n");
+	contertedText = contertedText.replace(/====\s*(.*)\s*====/g, "### $1\n\n");
+    contertedText = contertedText.replace(/===\s*(.*)\s*===/g, "## $1");
+    contertedText = contertedText.replace(/==\s*(.*)\s*==/g, "# $1");
+
+	// convert
+	// "[http://coding.smashingmagazine.com/2012/04/20/decoupling-html-from-css/ Decoupling HTML From CSS]"
+	// to
+	// "[Decoupling HTML From CSS](http://coding.smashingmagazine.com/2012/04/20/decoupling-html-from-css/)"
+    // '[^\s]*' matches the URL, '([^\]]*)' machtes everything else till the first closing brakcet ']'
+	contertedText = contertedText.replace(/\[([^\s]*)\s([^\]]*)\]/g, "[$2]($1)");
+
+    // convert '**' into '    *'
+	contertedText = contertedText.replace(/\*\*/g, "    *");
+
+
+	// show the converted text
+	var markdownEl = document.getElementById('result-markdown');
+	markdownEl.value = contertedText;
+}
+
+//-->
+</script>
+
+</head>
+<body>
+
+	<h1>MediaWiki to Markdown Javascript Converter</h1>
+    <p>Converts currently only headings and list elements.</p>
+
+    <label for="input-mediawiki">MediaWiki Code:</label><br/>
+	<textarea id="input-mediawiki" rows="20" cols="100"></textarea>
+	<br /><br />
+	<input type="button" value="Convert to Markdown" class="btn" onclick="convertMediawikiToMarkdown()" />
+	<br /><br />
+
+    <label for="result-markdown">Markdown converted Code:</label><br/>
+	<textarea id="result-markdown" rows="20" cols="100"></textarea>
+
+    <br/>
+	<div style="clean: both; float: right;">
+        v0.1<br/>
+        Open Source @ <a href="https://github.com/sinnwerkstatt/MediaWiki-to-Markdown-Javascript-Converter">GitHub</a>.
+    </div>
+
+</body>
+</html>
