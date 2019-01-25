@@ -1,11 +1,8 @@
-MediaWiki-to-Markdown-Javascript-Converter
+MediaWiki to Markdown - JS Converter
 ==========================================
 
-client-side MediaWiki to Markdown code conversion tool.
+Forked from client-side MediaWiki to Markdown code conversion tool.
 
-# Use
-* Open http://sinnwerkstatt.github.io/MediaWiki-to-Markdown-Javascript-Converter/ 
-* Paste your mediawiki code and press "Convert to Markdown".
 
 # Features
 * Headings
